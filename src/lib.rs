@@ -29,9 +29,18 @@ pub fn amount_to_ui_amount(amount: u64, decimals: u8) -> f64 {
 
 solana_program::declare_id!("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
 
+pub mod spl_token_2022 {
+    use solana_program::pubkey::Pubkey;
+    use std::str::FromStr;
+
+    pub fn id() -> Pubkey {
+        Pubkey::from_str("TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb").unwrap()
+    }
+}
+
 /// Checks that the supplied program ID is the correct one for SPL-token
 pub fn check_program_account(spl_token_program_id: &Pubkey) -> ProgramResult {
-    if spl_token_program_id != &id() {
+    if spl_token_program_id != &id() && spl_token_program_id != &spl_token_2022::id() {
         return Err(ProgramError::IncorrectProgramId);
     }
     Ok(())
